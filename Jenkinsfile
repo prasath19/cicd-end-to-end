@@ -1,6 +1,12 @@
 pipeline {
     
-    agent any 
+     agent {
+        docker {
+            image 'python:3.9'
+            label 'docker'
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // Allows Docker commands within the container
+        }
+    } 
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
