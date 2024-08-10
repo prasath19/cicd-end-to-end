@@ -30,10 +30,12 @@ pipeline {
         stage('Push the artifacts'){
            steps{
                 script{
-                    sh '''
-                    echo 'Push to Repo'
-                    docker push poornaprasath/cicd-e2e:${BUILD_NUMBER}
-                    '''
+                    docker.withRegistry('https://index.docker.io/v1/', '71ce678a-c112-46eb-b128-71c51787b9d2') {
+                        sh '''
+                        echo 'Push to Repo'
+                        docker push poornaprasath/cicd-e2e:${BUILD_NUMBER}
+                        '''
+                    }
                 }
             }
         }
